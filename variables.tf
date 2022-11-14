@@ -4,13 +4,20 @@ variable "project" {
     template    = optional(string, "Basic")
     visibility  = optional(string, "private")
     description = optional(string, "Managed by terraform")
-    features    = optional(map(string), {
+    features = optional(map(string), {
       boards       = "enabled"
       repositories = "enabled"
       pipelines    = "enabled"
       testplans    = "disabled"
       artifacts    = "disabled"
     })
-
+    security = optional(object({
+      git = map(object({
+        permissions = map(string)
+      }))
+    }))
+    repos = map(object({
+      default_branch = optional(string, "refs/heads/main")
+    }))
   })
 }

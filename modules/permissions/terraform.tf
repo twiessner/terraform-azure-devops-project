@@ -1,6 +1,5 @@
-terraform {
-  required_version = "~> 1.3"
 
+terraform {
   required_providers {
     azuredevops = {
       source = "microsoft/azuredevops"
