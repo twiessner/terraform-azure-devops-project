@@ -11,14 +11,16 @@ module "permissions" {
   source = "./modules/permissions"
 
   project_id = azuredevops_project.project.id
-  git = var.project.security.git
+  git        = var.project.security.git
 }
 
 module "repos" {
   for_each = var.project.repos
-  source = "./modules/repositories"
+  source   = "./modules/repositories"
 
-  name = each.key
-  project_id = azuredevops_project.project.id
+  name           = each.key
+  project_id     = azuredevops_project.project.id
   default_branch = each.value.default_branch
+  files          = each.value.files
+  pipelines      = each.value.pipelines
 }

@@ -8,5 +8,5 @@ variable "git" {
     permissions = map(string)
   }))
   description = ""
-  default = {}
+  default     = {}
 }

@@ -7,6 +7,17 @@ variable "project_id" {
 }
 
 variable "default_branch" {
-  type = string
+  type        = string
   description = ""
+}
+
+variable "files" {
+  type = map(object({
+    path    = string
+    content = string
+  }))
+}
+
+variable "pipelines" {
+  type = map(string)
 }

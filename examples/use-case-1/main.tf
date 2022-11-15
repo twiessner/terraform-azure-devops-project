@@ -1,9 +1,30 @@
+
+data "template_file" "tf_gitignore" {
+  template = file("./_templates/terraform.gitignore")
+}
+
+data "template_file" "pipeline" {
+  template = file("./_templates/azure-pipelines.yaml")
+}
+
 locals {
   project = {
     name = "internal_demo"
     repos = {
-      java-app = {
-
+      terraform = {
+        files = {
+          ".gitignore" = {
+            content = data.template_file.tf_gitignore.rendered
+            path    = "/"
+          }
+          "azure-pipelines.yaml" = {
+            content = data.template_file.pipeline.rendered
+            path    = "/azdo"
+          }
+        }
+        pipelines = {
+          Build = "azure-pipelines.yaml"
+        }
       }
     }
     security = {
@@ -16,16 +37,14 @@ locals {
             RenameRepository = "Allow"
           }
         }
-        Readers = {
-          permissions = {
-            CreateRepository = "Allow"
-          }
-        }
       }
     }
   }
 }
 
+/**
+ * Using the terraform module to manage a single Azure DevOps project.
+ **/
 module "project" {
   source = "../../"
 
