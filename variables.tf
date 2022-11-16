@@ -15,14 +15,16 @@ variable "project" {
       git = map(object({
         permissions = map(string)
       }))
-    }))
-    repos = map(object({
+    }), {
+      git = {}
+    })
+    repos = optional(map(object({
       default_branch = optional(string, "refs/heads/main")
       files = optional(map(object({
         path    = string
         content = string
       })), {})
       pipelines = optional(map(string), {})
-    }))
+    })), {})
   })
 }

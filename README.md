@@ -26,7 +26,6 @@ To be able to use this Terraform module, there are the following configuration o
 ```hcl
 variable "project" {
   type = object({
-    # common project metadata settings incl. defaults
     name        = string
     template    = optional(string, "Basic")
     visibility  = optional(string, "private")
@@ -38,21 +37,21 @@ variable "project" {
       testplans    = "disabled"
       artifacts    = "disabled"
     })
-    # security settings, eg. permissions
     security = optional(object({
       git = map(object({
         permissions = map(string)
       }))
-    }))
-    # settings for some initial repositories, files and pipelines
-    repos = map(object({
+    }), {
+      git = {}
+    })
+    repos = optional(map(object({
       default_branch = optional(string, "refs/heads/main")
       files = optional(map(object({
         path    = string
         content = string
       })), {})
       pipelines = optional(map(string), {})
-    }))
+    })), {})
   })
 }
 ```
