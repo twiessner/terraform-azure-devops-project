@@ -30,7 +30,7 @@ data "azuredevops_group" "project" {
 resource "azuredevops_project_permissions" "project" {
   for_each = var.project
 
-  project_id = var.project_id
-  principal  = data.azuredevops_group.project[each.key].id
+  project_id  = var.project_id
+  principal   = data.azuredevops_group.project[each.key].id
   permissions = each.value.permissions
 }

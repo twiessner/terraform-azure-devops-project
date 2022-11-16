@@ -27,7 +27,7 @@ variable "project" {
     })
     # settings for git repositories
     repos = optional(map(object({
-      default_branch = optional(string, "refs/heads/main")
+      default_branch                  = optional(string, "refs/heads/main")
       default_branch_policies_enabled = optional(bool, true)
       # setup initial files
       files = optional(map(object({
