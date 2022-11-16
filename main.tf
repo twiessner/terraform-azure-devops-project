@@ -12,6 +12,7 @@ module "permissions" {
 
   project_id = azuredevops_project.project.id
   git        = var.project.security.git
+  project    = var.project.security.project
 }
 
 module "repos" {

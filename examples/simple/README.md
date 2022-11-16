@@ -4,11 +4,13 @@
 This example acts as a standalone [Terraform](https://www.terraform.io) project that uses the module to manage a single use case.
 
 - Manage (create, update, delete) a single project
-- Customize the built-in Group `Contributors` to allow some git permissions
+- Customize the built-in Group `Contributors` to allow some git some permissions
   - ForcePush
   - CreateRepository
   - DeleteRepository
   - RenameRepository
+- Customize the built-in group `Contributors` to allow some project level permissions
+  -  DELETE
 
 > Note: customizing the permissions for built-in groups in Azure DevOps can help implement the principle of `least privilege`
 > because you can eliminate the need for the `Project Administrator` group.
@@ -52,3 +54,8 @@ terraform apply
 ```bash
 terraform destroy
 ```
+
+# Links
+
+- [GIT level permissions](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_permissions)
+- [Project level permissions](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/project_permissions)

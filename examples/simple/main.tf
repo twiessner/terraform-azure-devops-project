@@ -13,6 +13,13 @@ locals {
           }
         }
       }
+      project = {
+        Contributors = {
+          permissions = {
+            DELETE = "Allow"
+          }
+        }
+      }
     }
   }
 }

@@ -10,3 +10,11 @@ variable "git" {
   description = ""
   default     = {}
 }
+
+variable "project" {
+  type = map(object({
+    permissions = map(string)
+  }))
+  description = ""
+  default     = {}
+}
