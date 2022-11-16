@@ -50,7 +50,7 @@ locals {
 # Using the terraform module to manage a single Azure DevOps project.
 module "projects" {
   for_each = local.projects
-  source = "../../"
+  source   = "../../"
 
   project = each.value
 }

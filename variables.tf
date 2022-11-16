@@ -15,7 +15,7 @@ variable "project" {
       git = map(object({
         permissions = map(string)
       }))
-    }), {
+      }), {
       git = {}
     })
     repos = optional(map(object({

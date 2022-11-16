@@ -71,7 +71,6 @@ locals {
 # Using the terraform module to manage a single Azure DevOps project.
 module "project" {
   source  = "git::https://github.com/twiessner/terraform-azure-devops-project"
-  version = "1.0.0"
 
   project = local.project
 }
