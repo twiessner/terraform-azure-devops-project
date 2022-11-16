@@ -19,9 +19,11 @@ module "repos" {
   for_each = var.project.repos
   source   = "./modules/repositories"
 
-  name           = each.key
-  project_id     = azuredevops_project.project.id
-  default_branch = each.value.default_branch
-  files          = each.value.files
-  pipelines      = each.value.pipelines
+  name       = each.key
+  project_id = azuredevops_project.project.id
+  files      = each.value.files
+  pipelines  = each.value.pipelines
+
+  default_branch                  = each.value.default_branch
+  default_branch_policies_enabled = each.value.default_branch_policies_enabled
 }

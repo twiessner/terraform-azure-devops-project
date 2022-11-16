@@ -11,6 +11,11 @@ variable "default_branch" {
   description = ""
 }
 
+variable "default_branch_policies_enabled" {
+  type        = bool
+  description = ""
+}
+
 variable "files" {
   type = map(object({
     path    = string

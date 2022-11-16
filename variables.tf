@@ -2,7 +2,7 @@ variable "project" {
   type = object({
     # settings for common metadata
     name        = string
-    template    = optional(string, "Basic")
+    template    = optional(string, "Agile")
     visibility  = optional(string, "private")
     description = optional(string, "Managed by terraform")
     # setup allowed project features
@@ -28,6 +28,7 @@ variable "project" {
     # settings for git repositories
     repos = optional(map(object({
       default_branch = optional(string, "refs/heads/main")
+      default_branch_policies_enabled = optional(bool, true)
       # setup initial files
       files = optional(map(object({
         path    = string
