@@ -62,7 +62,7 @@ variable "project" {
 main.tf
 ```hcl
 
-# Describe the project configuration, using the [Data Structure](#data-structure)
+# Describe the project configuration, using the documented Data Structure above
 locals {
   project = {
     name = "demo"
