@@ -34,6 +34,5 @@ module "pipelines" {
   project_id     = var.project_id
   default_branch = var.default_branch
   path           = var.files[each.value].path
-  content        = var.files[each.value].content
   repository_id  = azuredevops_git_repository.repo.id
 }

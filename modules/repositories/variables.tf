@@ -23,7 +23,7 @@ variable "files" {
     path    = string
     content = string
   }))
-  description = "The data structure for file to create."
+  description = "The data structure for files to create."
 }
 
 variable "pipelines" {
