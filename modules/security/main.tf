@@ -1,4 +1,3 @@
-
 locals {
   # transform the original to a flat structure
   mapped_rbac_structure = flatten([

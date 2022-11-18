@@ -1,4 +1,3 @@
-
 resource "azuredevops_branch_policy_min_reviewers" "default" {
   count = var.default_branch_policies_enabled ? 1 : 0
 

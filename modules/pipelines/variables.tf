@@ -1,29 +1,29 @@
-
 variable "project_id" {
-  type = string
+  type        = string
+  description = "The id of the created project."
 }
 
 variable "repository_id" {
-  type = string
+  type        = string
+  description = "The id of the referenced repository."
 }
 
 variable "name" {
-  type = string
+  type        = string
+  description = "The name of this pipeline."
 }
 
 variable "file_name" {
-  type = string
+  type        = string
+  description = "The name of the yaml file for this pipeline."
 }
 
 variable "path" {
-  type = string
-}
-
-variable "content" {
-  type = string
+  type        = string
+  description = "The path of the yaml file for this pipeline."
 }
 
 variable "default_branch" {
   type        = string
-  description = ""
+  description = "The branch name of the yaml file for this pipeline."
 }

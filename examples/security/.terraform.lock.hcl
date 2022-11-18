@@ -3,7 +3,7 @@
 
 provider "registry.terraform.io/hashicorp/azuread" {
   version = "2.30.0"
-  hashes = [
+  hashes  = [
     "h1:WnSPiREAFwnBUKREokMdHQ8Cjs47MzvS9pG8VS1ktec=",
     "zh:1c3e89cf19118fc07d7b04257251fc9897e722c16e0a0df7b07fcd261f8c12e7",
     "zh:2e62c193030e04ebb10cc0526119cf69824bf2d7e4ea5a2f45bd5d5fb7221d36",
@@ -23,7 +23,7 @@ provider "registry.terraform.io/hashicorp/azuread" {
 provider "registry.terraform.io/microsoft/azuredevops" {
   version     = "0.3.0"
   constraints = ">= 0.3.0"
-  hashes = [
+  hashes      = [
     "h1:6EahKXXFIzDBkrzZ9J8yrny2SxwOXQ5kmvEDgElUW+k=",
     "zh:20726e735a78d8557c502d8802325f920374cab65fa28cf2742d9d50631c42ce",
     "zh:396a231eb905cdde46b1911982d730f8feb040fe3d46d84de7d90505f264d014",

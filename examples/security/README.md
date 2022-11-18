@@ -1,7 +1,7 @@
-
 # Introduction
 
-This example acts as a standalone [Terraform](https://www.terraform.io) project that uses the module to manage a single use case.
+This example acts as a standalone [Terraform](https://www.terraform.io) project that uses the module to manage a single
+use case.
 
 - Manage (create, update, delete) a single project
 - Customize the built-in Group `Contributors` to allow some git some permissions
@@ -10,17 +10,21 @@ This example acts as a standalone [Terraform](https://www.terraform.io) project 
   - DeleteRepository
   - RenameRepository
 - Customize the built-in group `Contributors` to allow some project level permissions
-  -  DELETE
+  - DELETE
 
-> Note: customizing the permissions for built-in groups in Azure DevOps can help implement the principle of `least privilege`
+> Note: customizing the permissions for built-in groups in Azure DevOps can help implement the principle
+> of `least privilege`
 > because you can eliminate the need for the `Project Administrator` group.
 
 # Terraform
+
 For this use case, we use a local backend.
 
-> Note: For productive environments this should not be used, but a [remote backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
+> Note: For productive environments this should not be used, but
+> a [remote backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
 
 ## Installation
+
 In order to use Terraform in your own environment, you need to install it.
 Instructions for this can be found [here](https://developer.hashicorp.com/terraform/downloads).
 

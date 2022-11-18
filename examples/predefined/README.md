@@ -1,7 +1,7 @@
-
 # Introduction
 
-This example acts as a standalone [Terraform](https://www.terraform.io) project that uses the module to manage this use cases:
+This example acts as a standalone [Terraform](https://www.terraform.io) project that uses the module to manage this use
+cases:
 
 - Manage (create, update, delete) a project **Predefined-Java**
   - Manage (create, update, delete) a repository `java-application`
@@ -12,11 +12,14 @@ This example acts as a standalone [Terraform](https://www.terraform.io) project 
     - deploy a pipeline, based on a yaml file
 
 # Terraform
+
 For this use case, we use a local backend.
 
-> Note: For productive environments this should not be used, but a [remote backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
+> Note: For productive environments this should not be used, but
+> a [remote backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
 
 ## Installation
+
 In order to use Terraform in your own environment, you need to install it.
 Instructions for this can be found [here](https://developer.hashicorp.com/terraform/downloads).
 

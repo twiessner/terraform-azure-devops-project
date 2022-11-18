@@ -1,4 +1,3 @@
-
 locals {
   project = {
     # Project name "Security"

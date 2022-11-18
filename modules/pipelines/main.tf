@@ -1,4 +1,3 @@
-
 resource "azuredevops_build_definition" "pipeline" {
   project_id = var.project_id
   name       = var.name

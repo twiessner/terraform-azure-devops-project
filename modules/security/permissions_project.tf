@@ -1,4 +1,3 @@
-
 data "azuredevops_group" "project" {
   for_each = var.project
 

@@ -1,4 +1,3 @@
-
 resource "azuredevops_git_repository" "repo" {
   name           = var.name
   project_id     = var.project_id

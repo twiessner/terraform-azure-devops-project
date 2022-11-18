@@ -1,4 +1,3 @@
-
 data "template_file" "java_gitignore" {
   template = file("./_templates/java.gitignore")
 }

@@ -1,4 +1,3 @@
-
 data "azuredevops_group" "git" {
   for_each = var.git
 

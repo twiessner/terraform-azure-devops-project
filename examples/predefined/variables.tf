@@ -1,4 +1,3 @@
-
 # providers
 #
 variable "tenant_id" {
