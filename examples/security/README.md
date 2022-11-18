@@ -16,9 +16,9 @@ This example acts as a standalone [Terraform](https://www.terraform.io) project 
 > because you can eliminate the need for the `Project Administrator` group.
 
 # Terraform
+For this use case, we use a local backend.
 
-> Note: For this use case, we only use a local backend.
-> For productive environments this should not be used, but [remote backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
+> Note: For productive environments this should not be used, but a [remote backend](https://developer.hashicorp.com/terraform/language/settings/backends/configuration).
 
 ## Installation
 In order to use Terraform in your own environment, you need to install it.
@@ -30,6 +30,9 @@ The configuration of the Terraform Provider `azuredevops` requires the following
 which is provided as a local file `_private.auto.tfvars`
 
 ```hcl
+# Azure AD settings
+#
+tenant_id = "<your Azure tenant id>"
 
 # Azure Devops settings
 #
@@ -57,5 +60,5 @@ terraform destroy
 
 # Links
 
-- [GIT level permissions](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_permissions)
-- [Project level permissions](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/project_permissions)
+- [Azure DevOps project level permissions](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/project_permissions)
+- [Azure Devops repository level permissions](https://registry.terraform.io/providers/microsoft/azuredevops/latest/docs/resources/git_permissions)

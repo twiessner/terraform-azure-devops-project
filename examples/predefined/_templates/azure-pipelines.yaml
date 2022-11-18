@@ -1,0 +1,10 @@
+trigger: none
+
+stages:
+  - stage: Default
+    jobs:
+      - job: Hello
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - script: echo "Hello World..."

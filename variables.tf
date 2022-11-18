@@ -15,6 +15,7 @@ variable "project" {
     })
     # settings for security customizing
     security = optional(object({
+      rbac = optional(map(set(string)), {})
       git = optional(map(object({
         permissions = map(string)
       })), {})

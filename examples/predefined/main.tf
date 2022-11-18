@@ -1,4 +1,12 @@
 
+data "template_file" "java_gitignore" {
+  template = file("./_templates/java.gitignore")
+}
+
+data "template_file" "java_class" {
+  template = file("./_templates/java.helloWorld")
+}
+
 data "template_file" "tf_gitignore" {
   template = file("./_templates/terraform.gitignore")
 }
@@ -10,10 +18,24 @@ data "template_file" "pipeline" {
 locals {
   projects = {
     project1 = {
-      name = "Extended-1"
+      name = "Predefined-Java"
+      repos = {
+        java-application = {
+          files = {
+            ".gitignore" = {
+              content = data.template_file.java_gitignore.rendered
+              path    = "/"
+            }
+            "HelloWorld.java" = {
+              content = data.template_file.java_class.rendered
+              path    = "/src/main"
+            }
+          }
+        }
+      }
     }
     project2 = {
-      name = "Extended-2"
+      name = "Predefined-Pipeline"
       repos = {
         terraform = {
           files = {
@@ -31,23 +53,10 @@ locals {
           }
         }
       }
-      security = {
-        git = {
-          Contributors = {
-            permissions = {
-              ForcePush        = "Allow"
-              CreateRepository = "Allow"
-              DeleteRepository = "Allow"
-              RenameRepository = "Allow"
-            }
-          }
-        }
-      }
     }
   }
 }
 
-# Using the terraform module to manage a single Azure DevOps project.
 module "projects" {
   for_each = local.projects
   source   = "../../"

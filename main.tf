@@ -1,16 +1,19 @@
 
-resource "azuredevops_project" "project" {
-  name               = var.project.name
-  description        = var.project.description
-  features           = var.project.features
-  visibility         = var.project.visibility
-  work_item_template = var.project.template
+module "project" {
+  source = "./modules/project"
+
+  name        = var.project.name
+  description = var.project.description
+  features    = var.project.features
+  visibility  = var.project.visibility
+  template    = var.project.template
 }
 
-module "permissions" {
-  source = "./modules/permissions"
+module "security" {
+  source = "./modules/security"
 
-  project_id = azuredevops_project.project.id
+  project_id = module.project.id
+  rbac       = var.project.security.rbac
   git        = var.project.security.git
   project    = var.project.security.project
 }
@@ -20,7 +23,7 @@ module "repos" {
   source   = "./modules/repositories"
 
   name       = each.key
-  project_id = azuredevops_project.project.id
+  project_id = module.project.id
   files      = each.value.files
   pipelines  = each.value.pipelines
 

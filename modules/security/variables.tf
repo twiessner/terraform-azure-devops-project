@@ -8,7 +8,6 @@ variable "git" {
     permissions = map(string)
   }))
   description = ""
-  default     = {}
 }
 
 variable "project" {
@@ -16,5 +15,9 @@ variable "project" {
     permissions = map(string)
   }))
   description = ""
-  default     = {}
+}
+
+variable "rbac" {
+  type        = map(set(string))
+  description = ""
 }

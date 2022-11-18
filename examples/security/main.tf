@@ -1,8 +1,15 @@
 
 locals {
   project = {
-    name = "simple"
+    # Project name "Security"
+    name = "Security"
     security = {
+      # Use Azure AD groups to manage built-in group permissions
+      rbac = {
+        Readers      = ["project-guests"]
+        Contributors = ["project-developers", "project-supporters"]
+      }
+      # Customize the built-in groups for git repository permissions
       git = {
         Contributors = {
           permissions = {
@@ -13,6 +20,7 @@ locals {
           }
         }
       }
+      # Customize the built-in group for common project permissions
       project = {
         Contributors = {
           permissions = {
@@ -24,7 +32,6 @@ locals {
   }
 }
 
-# Using the terraform module to manage a single Azure DevOps project.
 module "project" {
   source = "../../"
 

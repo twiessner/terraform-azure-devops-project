@@ -1,6 +1,11 @@
 
-# provider
+# providers
 #
+variable "tenant_id" {
+  type    = string
+  default = ""
+}
+
 variable "devops_org_url" {
   type        = string
   description = ""
