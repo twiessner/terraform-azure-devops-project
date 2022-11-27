@@ -57,16 +57,10 @@ necessary.
 
 > Note: The execution requires at least this administrative privileges:
 > - Azure DevOps
-    >
-
-- Collection Administrator
-
+>   - Collection Administrator
 > - Azure Active Directory
-    >
-
-- Directory Readers
-
-> - Azure DevOps Administrator
+>   - Directory Readers
+>   - Azure DevOps Administrator
 
 Check out different running examples [here](./examples), otherwise the easiest way is to create a file `main.tf`
 
