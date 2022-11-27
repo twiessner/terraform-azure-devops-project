@@ -8,12 +8,14 @@ roll out standard files and pipelines for automation, etc.... There are many oth
 aspects that need to be executed in the lifecycle of an administrator.
 
 A scalable solution can provide Infrastructure as Code, which can automate many of these tasks.
-This repository provides an easy way to use a module based on [Terraform](https://www.terraform.io) to manage an existing
+This repository provides an easy way to use a module based on [Terraform](https://www.terraform.io) to manage an
+existing
 Azure DevOps organization with a connected Azure Active Directory as an administrator.
 
 ## Features
 
-Azure DevOps offers a large set of features, some of which are implemented in Terraform. Of these, the following are currently implemented:
+Azure DevOps offers a large set of features, some of which are implemented in Terraform. Of these, the following are
+currently implemented:
 
 ### Supported
 
@@ -24,13 +26,19 @@ Azure DevOps offers a large set of features, some of which are implemented in Te
   - branch protection by default (default branch)
   - initial provisioning of files
 - Lifecycle (Create, Update, Delete) of pipelines
+- Lifecycle (Create, Update, Delete)
+  of [Azure Service Connections](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml)
+  - [Azure Resource Manager](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/connect-to-azure?view=azure-devops)
+- Lifecycle (Create, Update, Delete) of Agent pools
+  - [Azure Virtual Machine Scale Sets](https://azure.microsoft.com/en-us/products/virtual-machine-scale-sets/#overview)
 
 ### Planned
 
 - Integration of [Azure Boards](https://azure.microsoft.com/en-us/products/devops/boards)
-- Integration of [Azure Service Connections](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml)
-  - Variable groups, synchronized from [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault/#product-overview)
-  - Agent pools using self hosted [Azure Virtual Machine Scale Sets](https://azure.microsoft.com/en-us/products/virtual-machine-scale-sets/#overview)
+- Integration
+  of [Azure Service Connections](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/service-endpoints?view=azure-devops&tabs=yaml)
+  - Variable groups, synchronized
+    from [Azure Key Vault](https://azure.microsoft.com/en-us/products/key-vault/#product-overview)
 
 ## Terraform
 
@@ -39,75 +47,45 @@ Azure DevOps offers a large set of features, some of which are implemented in Te
 In order to use Terraform in your own environment, you need to install it.
 Instructions for this can be found [here](https://developer.hashicorp.com/terraform/downloads).
 
-### Data structure
+### Configuration
 
-To be able to use this Terraform module, there are the following configuration options in [variables.tf](./variables.tf).
-
-```hcl
-variable "project" {
-  type = object({
-    # settings for common metadata
-    name        = string
-    template    = optional(string, "Agile")
-    visibility  = optional(string, "private")
-    description = optional(string, "Managed by terraform")
-    # setup allowed project features
-    features = optional(map(string), {
-      boards       = "enabled"
-      repositories = "enabled"
-      pipelines    = "enabled"
-      artifacts    = "enabled"
-      testplans    = "disabled" # disabled by default because of additional licence cost
-    })
-    # settings for security customizing
-    security = optional(object({
-      git = optional(map(object({
-        permissions = map(string)
-      })), {})
-      project = optional(map(object({
-        permissions = map(string)
-      })), {})
-    }), {
-      git     = {}
-      project = {}
-    })
-    # settings for git repositories
-    repos = optional(map(object({
-      default_branch = optional(string, "refs/heads/main")
-      default_branch_policies_enabled = optional(bool, true)
-      # setup initial files
-      files = optional(map(object({
-        path    = string
-        content = string
-      })), {})
-      # setup initial pipelines based on initial files
-      pipelines = optional(map(string), {})
-    })), {})
-  })
-}
-```
+To be able to use this Terraform module, there are the following [configuration options](./TERRAFORM.md).
+The configuration is designed to be flexible so that only the settings that match the corresponding use case are
+necessary.
 
 ### Examples
 
 > Note: The execution requires at least this administrative privileges:
-> - Azure DevOps: **Collection Administrator**
-> - Azure Active Directory: **Directory Readers**
+> - Azure DevOps
+    >
 
-Check out running examples [here](./examples), otherwise the easiest way is this:
+- Collection Administrator
 
-main.tf
+> - Azure Active Directory
+    >
+
+- Directory Readers
+
+> - Azure DevOps Administrator
+
+Check out different running examples [here](./examples), otherwise the easiest way is to create a file `main.tf`
+
 ```hcl
 terraform {
   required_version = "~> 1.3"
 
   required_providers {
+    shell = {
+      source = "scottwinkler/shell"
+    }
     azuredevops = {
-      source  = "microsoft/azuredevops"
-      version = ">= 0.3.0"
+      source = "microsoft/azuredevops"
     }
   }
 }
 
+# Initialize providers
+#
 provider "azuread" {
   tenant_id = "<your Azure tenant id>"
 }
@@ -117,17 +95,25 @@ provider "azuredevops" {
   devops_org_pat = "<your personal access token>"
 }
 
-locals {
-  project = {
-    name = "demo"
+provider "shell" {
+  sensitive_environment = {
+    # Note: required parameter name
+    AZURE_DEVOPS_PAT = "<your personal access token>"
   }
 }
 
 module "project" {
-  source  = "git::https://github.com/twiessner/terraform-azure-devops-project"
+  source = "git::https://github.com/twiessner/terraform-azure-devops-project"
 
-  project = local.project
+  name = "Demo"
 }
+```
+
+then execute in a shell
+
+```bash
+terraform init -upgrade
+terraform apply
 ```
 
 # Links
