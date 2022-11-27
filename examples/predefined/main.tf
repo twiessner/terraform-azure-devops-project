@@ -16,8 +16,7 @@ data "template_file" "pipeline" {
 
 locals {
   projects = {
-    project1 = {
-      name = "Predefined-Java"
+    Predefined-Java = {
       repos = {
         java-application = {
           files = {
@@ -33,8 +32,7 @@ locals {
         }
       }
     }
-    project2 = {
-      name = "Predefined-Pipeline"
+    Predefined-Pipeline = {
       repos = {
         terraform = {
           files = {
@@ -60,5 +58,6 @@ module "projects" {
   for_each = local.projects
   source   = "../../"
 
-  project = each.value
+  name  = each.key
+  repos = each.value.repos
 }

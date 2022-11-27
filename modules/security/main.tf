@@ -1,15 +1,15 @@
 locals {
   # transform the original to a flat structure
   mapped_rbac_structure = flatten([
-    for k, v in var.rbac : [
-      for group in v : {
-        azdo_group_name = k
-        aad_group_name  = group
-      }
-    ]
+  for k, v in var.rbac : [
+  for group in v : {
+    azdo_group_name = k
+    aad_group_name  = group
+  }
+  ]
   ])
   # use the resulting map of unique group information
-  rbac = { for v in local.mapped_rbac_structure : "${v.azdo_group_name}-${v.aad_group_name}" => v }
+  rbac = {for v in local.mapped_rbac_structure : "${v.azdo_group_name}-${v.aad_group_name}" => v}
 }
 
 

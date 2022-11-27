@@ -28,5 +28,5 @@ variable "files" {
 
 variable "pipelines" {
   type        = map(string)
-  description = "The data structure for pipelines to create, e.g. <Pipeline Name> = <yaml file name>"
+  description = "The data structure for pipelines to create, e.g. <Pipeline Name> = <yaml file name>."
 }

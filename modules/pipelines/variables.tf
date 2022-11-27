@@ -1,6 +1,6 @@
 variable "project_id" {
   type        = string
-  description = "The id of the created project."
+  description = "The id of the referenced project."
 }
 
 variable "repository_id" {
